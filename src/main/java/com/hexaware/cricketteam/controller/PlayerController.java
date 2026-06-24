@@ -22,7 +22,7 @@ public class PlayerController {
     // Add Player
     @PostMapping
     public PlayerDTO addPlayer(
-            @Valid @RequestBody PlayerDTO dto) {
+            @Valid @RequestBody PlayerDTO dto) {  // converts json to dto
 
         return service.addPlayer(dto);
     }
@@ -42,7 +42,7 @@ public class PlayerController {
         return service.getPlayerById(playerId);
     }
 
-    // Update Player
+    
     @PutMapping("/{playerId}")
     public PlayerDTO updatePlayer(
             @PathVariable Long playerId,
@@ -51,11 +51,19 @@ public class PlayerController {
         return service.updatePlayer(playerId, dto);
     }
 
-    // Delete Player
+    
     @DeleteMapping("/{playerId}")
     public String deletePlayer(
             @PathVariable Long playerId) {
 
         return service.deletePlayer(playerId);
+    }
+    
+    @DeleteMapping("/jersey/{jerseyNumber}")
+    public String deletePlayerByJerseyNumber(
+            @PathVariable Integer jerseyNumber) {
+
+        return service.deletePlayerByJerseyNumber(
+                jerseyNumber);
     }
 }

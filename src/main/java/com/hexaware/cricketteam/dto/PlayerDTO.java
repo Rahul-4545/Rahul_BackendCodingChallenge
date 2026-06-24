@@ -7,32 +7,36 @@ import lombok.Data;
 @Data
 public class PlayerDTO {
 
-    @NotNull(message = "Player Id cannot be null")
+    @NotNull
     private Long playerId;
 
-    @NotBlank(message = "Player Name is required")
+    @NotBlank
     @Size(min = 3,max = 50)
     private String playerName;
 
-    @NotNull(message = "Jersey Number is required")
+    @NotNull
     @Min(value = 1)
     @Max(value = 999)
     private Integer jerseyNumber;
 
-    @NotBlank(message = "Role is required")
-    private String role;
+    @NotBlank
+    @Pattern(
+    		 regexp = "(?i)Batsman|Bowler|Keeper|All Rounder",
+    		 message = "Role must be Batsman, Bowler, Keeper or All Rounder"
+    		)
+    		private String role;
 
-    @NotNull(message = "Total Matches is required")
+    @NotNull
     @Min(value = 0)
     private Integer totalMatches;
 
-    @NotBlank(message = "Team Name is required")
+    @NotBlank
     private String teamName;
 
-    @NotBlank(message = "Country/State Name is required")
+    @NotBlank
     private String countryStateName;
 
-    @NotBlank(message = "Description is required")
+    @NotBlank
     @Size(max = 500)
     private String description;
 }

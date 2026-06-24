@@ -18,13 +18,13 @@ public class PlayerServiceImpl implements IPlayer {
     private PlayerRepository repository;
 
     @Override
-    public PlayerDTO addPlayer(PlayerDTO dto) {
+    public PlayerDTO addPlayer(PlayerDTO dto) {  // controller receriving json data
 
-        Player player = dtoToEntity(dto);
+        Player player = dtoToEntity(dto);  // storing it in dto and now cinverting it to entity bec rep works with entity
 
-        Player savedPlayer = repository.save(player);
+        Player savedPlayer = repository.save(player); // saving it in db
 
-        return entityToDto(savedPlayer);
+        return entityToDto(savedPlayer);  
     }
 
     @Override
@@ -114,5 +114,21 @@ public class PlayerServiceImpl implements IPlayer {
         dto.setDescription(player.getDescription());
 
         return dto;
+    }
+    
+    @Override
+    public String deletePlayerByJerseyNumber(
+            Integer jerseyNumber) {
+
+        Player player = repository
+                .findByJerseyNumber(jerseyNumber)
+                .orElseThrow(() ->
+                    new PlayerNotFoundException(
+                        "Player not found with Jersey Number : "
+                        + jerseyNumber));
+
+        repository.delete(player);
+
+        return "Player deleted successfully";
     }
 }

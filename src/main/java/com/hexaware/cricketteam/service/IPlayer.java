@@ -16,4 +16,6 @@ public interface IPlayer {
                            PlayerDTO dto);
 
     String deletePlayer(Long playerId);
+    
+    String deletePlayerByJerseyNumber(Integer jerseyNumber);
 }
